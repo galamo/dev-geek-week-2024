@@ -31,18 +31,24 @@ export default function Cart() {
     <div className="loader"></div>
   ) : (
     <div>
-      {cart.map((product: any) => {
-        return <CartCard {...product} />;
+      {cart.map((product: any, index: number) => {
+        return <CartCard {...product} index={index} />;
       })}
     </div>
   );
 }
-
-function CartCard(props: any) {
-  console.log(props);
+type CartCardType = {
+  index: number;
+  thumbnail: string;
+  price: number;
+  brand: string;
+  category: string;
+};
+function CartCard(props: CartCardType) {
   const header = <img alt="Card" src={props.thumbnail} />;
   const footer = (
     <span>
+      <h3>{props.index}</h3>
       {props.price}$
       <Button label="Remove" />
     </span>
